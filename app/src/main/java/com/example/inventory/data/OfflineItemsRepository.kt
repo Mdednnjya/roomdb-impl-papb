@@ -16,4 +16,37 @@
 
 package com.example.inventory.data
 
-class OfflineItemsRepository : ItemsRepository
+import ItemsRepository
+import kotlinx.coroutines.flow.Flow
+
+/**
+ * Name: Made Narayan Dananjaya
+ * Nim: 225150207111034
+ *
+ * Comment:
+ * 1. Mengimpor `ItemsRepository` untuk mengimplementasi interface tersebut.
+ * 2. Mengimpor `Flow` dari `kotlinx.coroutines.flow` untuk menggunakan aliran
+ *    data asynchronous.
+ * 3. Mengimplementasi `getAllItemsStream` dengan memanggil `itemDao.getAllItems`
+ *    untuk mengambil seluruh item dari database.
+ * 4. Mengimplementasi `getItemStream` dengan memanggil `itemDao.getItem`
+ *    untuk mengambil item tertentu berdasarkan `id` yang diberikan.
+ * 5. Mengimplementasi `insertItem` dengan memanggil `itemDao.insert` untuk
+ *    menambah item ke database.
+ * 6. Mengimplementasi `deleteItem` dengan memanggil `itemDao.delete` untuk
+ *    menghapus item dari database.
+ * 7. Mengimplementasi `updateItem` dengan memanggil `itemDao.update` untuk
+ *    memperbarui data item di database.
+ */
+
+class OfflineItemsRepository(private val itemDao: ItemDao) : ItemsRepository {
+    override fun getAllItemsStream(): Flow<List<Item>> = itemDao.getAllItems()
+
+    override fun getItemStream(id: Int): Flow<Item?> = itemDao.getItem(id)
+
+    override suspend fun insertItem(item: Item) = itemDao.insert(item)
+
+    override suspend fun deleteItem(item: Item) = itemDao.delete(item)
+
+    override suspend fun updateItem(item: Item) = itemDao.update(item)
+}

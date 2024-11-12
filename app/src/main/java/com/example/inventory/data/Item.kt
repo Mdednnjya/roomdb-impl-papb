@@ -16,12 +16,27 @@
 
 package com.example.inventory.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 
 /**
- * Entity data class represents a single row in the database.
+ * Name: Made Narayan Dananjaya
+ * Nim: 225150207111034
+ *
+ * Comment:
+ * 1. Saya menambahkan syntax 'data' sebelum class agar jetpack compose
+ *    tahu jika saya menginisasi data class.
+ * 2. Menambakan anotasi '@Entity' pada line diatas data class untuk
+ *    mendefinisikan table dan nama tabel pada room.
+ * 3. Menamambahkan anotasi '@PrimaryKey' untuk menginisiasi bahwa
+ *    val id adalah primary key dan menambahkan params agar auto increment.
+ * 4.
  */
-class Item(
-    val id: Int = 0,
+
+@Entity(tableName = "Items")
+data class Item(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
     val price: Double,
     val quantity: Int
